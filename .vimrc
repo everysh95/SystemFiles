@@ -78,3 +78,4 @@ set smartindent
 set noexpandtab
 set tabstop=4
 set shiftwidth=4
+noremap! <C-f> <esc>
