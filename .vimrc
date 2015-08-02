@@ -23,9 +23,30 @@ NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'Shougo/neocomplcache'
 "独自に追加
-NeoBundle 'MetalPhaeton/easybracket-vim'
+
+"インデントを視覚化
+colorscheme default
+NeoBundle 'nathanaelkane/vim-indent-guides'
+set ts=4 sw=4 et
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_guide_size = 1
+
+autocmd VimEnter,ColorScheme * :hi IndentGuidesOdd guibg=red ctermbg=7
+autocmd VimEnter,ColorScheme * :hi IndentGuidesEven guibg=green ctermbg=0
+
+"閉じカッコを自動挿入
+NeoBundle 'Townk/vim-autoclose'
+
 " You can specify revision/branch/tag.
-NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+NeoBundleLazy 'Shougo/vimshell', {
+ \ 'depends' : 'Shougo/vimproc',
+  \ 'autoload' : {
+  \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
+  \                 'VimShellExecute', 'VimShellInteractive',
+  \                 'VimShellTerminal', 'VimShellPop'],
+  \   'mappings' : ['<Plug>(vimshell_switch)']
+  \ }}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""
  let g:acp_enableAtStartup = 0
@@ -79,3 +100,4 @@ set noexpandtab
 set tabstop=4
 set shiftwidth=4
 noremap! <C-f> <esc>
+nmap <silent> vp :<C-u>VimShellPop<CR> 
